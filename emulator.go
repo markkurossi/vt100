@@ -12,8 +12,12 @@ type Emulator struct {
 	state  state
 }
 
+// Output is called for each character that is printed on the
+// screen. The emulator argument contains the current cursor position
+// and rendering attributes.
 type Output func(e *Emulator, ch rune) error
 
+// NewEmulator creates a new emulator with the argument output.
 func NewEmulator(output Output) *Emulator {
 	return &Emulator{
 		output: output,
@@ -60,6 +64,7 @@ func stCSI(e *Emulator, ch rune) error {
 	return nil
 }
 
+// Input runs the emulation for the input data.
 func (e *Emulator) Input(data []rune) error {
 	for _, r := range data {
 		err := e.state(e, r)

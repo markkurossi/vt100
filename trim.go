@@ -10,6 +10,8 @@ import (
 	"strings"
 )
 
+// DisplayWidth computes the width of the argument data when all
+// emulator control codes have been removed.
 func DisplayWidth(data string) (int, error) {
 	var width int
 
@@ -25,6 +27,7 @@ func DisplayWidth(data string) (int, error) {
 	return width, nil
 }
 
+// Trim removes all emulator control codes from the argument data.
 func Trim(data string) (string, error) {
 	var sb strings.Builder
 
