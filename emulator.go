@@ -94,6 +94,7 @@ type CharDisplay interface {
 type Emulator struct {
 	display      CharDisplay
 	Size         Point
+	originMode   bool
 	scrollTop    int
 	scrollBottom int
 	Cursor       Point
@@ -124,6 +125,9 @@ func NewEmulator(stdout, stderr io.Writer, display CharDisplay) *Emulator {
 // Reset resets the emulator to initial state.
 func (e *Emulator) Reset() {
 	e.Size = e.display.Size()
+	e.originMode = false
+	e.scrollTop = 0
+	e.scrollBottom = e.Size.Y
 	e.ch = e.Default
 	e.clear(true, true)
 }

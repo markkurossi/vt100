@@ -167,7 +167,11 @@ func actCSI(e *Emulator, state *state, ch int) {
 
 	case 'H': // CUP - CUrsor Position
 		_, row, col := state.csiParams(1, 1)
-		e.moveTo(row-1, col-1)
+		if e.originMode {
+			e.moveTo(e.scrollTop+row-1, col-1)
+		} else {
+			e.moveTo(row-1, col-1)
+		}
 
 	case 'J': // Erase in Display (cursor does not move)
 		switch state.csiParam(0) {
@@ -210,6 +214,9 @@ func actCSI(e *Emulator, state *state, ch int) {
 				e.Resize(132, e.Size.Y)
 				e.moveTo(0, 0)
 
+			case 6: // DECOM - Origin Mode, line 1 is relative to scroll region
+				e.originMode = true
+
 			case 1034: // Interpret "meta" key, sets eight bit (eightBitInput)
 
 			default:
@@ -226,6 +233,9 @@ func actCSI(e *Emulator, state *state, ch int) {
 				e.clear(true, true)
 				e.Resize(80, e.Size.Y)
 				e.moveTo(0, 0)
+
+			case 6: // DECOM - Line numbers are independent of scrolling region
+				e.originMode = false
 
 			default:
 				e.debug("unsupported ESC[%sl", string(state.parameters))
