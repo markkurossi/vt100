@@ -44,13 +44,13 @@ func actC0Control(e *Emulator, state *state, ch int) {
 		e.moveTo(e.Cursor.Y, x)
 
 	case 0x0a: // Linefeed, move to same position on next line (see also NL)
-		e.moveTo(e.Cursor.Y+1, e.Cursor.X)
+		e.lf()
 
 	case 0x0b: // Vertical Tabulation, move to next predetermined line
-		e.moveTo(e.Cursor.Y+1, e.Cursor.X)
+		e.lf()
 
 	case 0x0d: // Carriage Return
-		e.moveTo(e.Cursor.Y, 0)
+		e.cr()
 
 	default:
 		e.debug("actC0Control: %s: 0x%x", state, ch)
@@ -60,11 +60,12 @@ func actC0Control(e *Emulator, state *state, ch int) {
 func actC1Control(e *Emulator, state *state, ch int) {
 	switch ch {
 	case 'D': // Index, moves down one line same column regardless of NL
-		e.moveTo(e.Cursor.Y+1, e.Cursor.X)
+		e.lf()
 	case 'E': // NEw Line, moves done one line and to first column (CR+LF)
-		e.moveTo(e.Cursor.Y+1, 0)
+		e.lf()
+		e.cr()
 	case 'M': // Reverse Index, go up one line, reverse scroll if necessary
-		e.moveTo(e.Cursor.Y-1, e.Cursor.X)
+		e.ri()
 	default:
 		e.debug("actC1Control: %s: %s0x%x", state, string(state.parameters), ch)
 	}

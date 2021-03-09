@@ -87,7 +87,7 @@ type CharDisplay interface {
 	// specified point.
 	DeleteChars(size, p Point, count int)
 	// ScrollUp scrolls the screen up count lines.
-	ScrollUp(count int)
+	ScrollUp(top, bottom, count int)
 }
 
 // Emulator implements terminal emulator.
@@ -223,6 +223,23 @@ func (e *Emulator) clear(start, end bool) {
 	}
 }
 
+func (e *Emulator) lf() {
+	if e.Cursor.Y == e.scrollBottom {
+		e.scrollUp(1)
+	} else {
+		e.moveTo(e.Cursor.Y+1, e.Cursor.X)
+	}
+}
+
+func (e *Emulator) ri() {
+	// XXX scrollDown
+	e.moveTo(e.Cursor.Y-1, e.Cursor.X)
+}
+
+func (e *Emulator) cr() {
+	e.moveTo(e.Cursor.Y, 0)
+}
+
 func (e *Emulator) moveTo(row, col int) {
 	if col < 0 {
 		col = 0
@@ -236,7 +253,6 @@ func (e *Emulator) moveTo(row, col int) {
 		row = 0
 	}
 	if row >= e.Size.Y {
-		e.scrollUp(e.Size.Y - row + 1)
 		row = e.Size.Y - 1
 	}
 	e.Cursor.Y = row
@@ -244,25 +260,17 @@ func (e *Emulator) moveTo(row, col int) {
 }
 
 func (e *Emulator) scrollUp(count int) {
-	if count >= e.Size.Y {
-		e.clear(true, true)
-		return
+	if count > e.scrollBottom-e.scrollTop+1 {
+		count = e.scrollBottom - e.scrollTop + 1
 	}
-	e.display.ScrollUp(count)
-
-	for i := 0; i < count; i++ {
-		e.clearLine(e.Size.Y-1-i, 0, e.Size.X)
-	}
+	e.display.ScrollUp(e.scrollTop, e.scrollBottom, count)
 }
 
 func (e *Emulator) insertChar(code int) {
 	if e.overflow {
-		if e.Cursor.Y+1 >= e.Size.Y {
-			e.scrollUp(1)
-			e.moveTo(e.Cursor.Y, 0)
-		} else {
-			e.moveTo(e.Cursor.Y+1, 0)
-		}
+		e.lf()
+		e.cr()
+		e.overflow = false
 	}
 	e.display.Set(e.Cursor, e.ch.Clone(rune(code)))
 	if e.Cursor.X+1 >= e.Size.X {

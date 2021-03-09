@@ -106,8 +106,30 @@ func (d *Stringer) DeleteChars(size, p Point, count int) {
 }
 
 // ScrollUp implements the CharDisplay.ScrollUp function.
-func (d *Stringer) ScrollUp(count int) {
-	// XXX
+func (d *Stringer) ScrollUp(top, bottom, count int) {
+	var lines [][]rune
+
+	for i := 0; i < top; i++ {
+		if i < len(d.lines) {
+			lines = append(lines, d.lines[i])
+		} else {
+			lines = append(lines, nil)
+		}
+	}
+	for i := top + count; i <= bottom; i++ {
+		if i < len(d.lines) {
+			lines = append(lines, d.lines[i])
+		} else {
+			lines = append(lines, nil)
+		}
+	}
+	for i := 0; i < count; i++ {
+		lines = append(lines, nil)
+	}
+	for i := bottom + 1; i < len(d.lines); i++ {
+		lines = append(lines, d.lines[i])
+	}
+	d.lines = lines
 }
 
 // DisplayWidth computes the character size width of the argument data

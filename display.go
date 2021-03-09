@@ -124,9 +124,26 @@ func (d *Display) DeleteChars(size, p Point, count int) {
 }
 
 // ScrollUp implements the CharDisplay.ScrollUp function.
-func (d *Display) ScrollUp(count int) {
-	for i := 0; i < count; i++ {
-		saved := d.Lines[0]
-		d.Lines = append(d.Lines[1:], saved)
+func (d *Display) ScrollUp(top, bottom, count int) {
+	var lines [][]Char
+
+	for i := 0; i < top; i++ {
+		lines = append(lines, d.Lines[i])
 	}
+	for i := top + count; i <= bottom; i++ {
+		lines = append(lines, d.Lines[i])
+	}
+	for i := 0; i < count; i++ {
+		line := d.Lines[top+i]
+
+		for j := 0; j < len(line); j++ {
+			line[j] = d.Blank
+		}
+
+		lines = append(lines, line)
+	}
+	for i := bottom + 1; i < len(d.Lines); i++ {
+		lines = append(lines, d.Lines[i])
+	}
+	d.Lines = lines
 }
