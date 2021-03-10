@@ -106,7 +106,12 @@ func emulTest(t *testing.T, dir, name string) error {
 
 	txtf, err := testsuite.Open(path.Join(dir, name+".txt"))
 	if err != nil {
-		return err
+		fmt.Printf("TestEmul %s: not output file: %s\n------ output ------\n",
+			name, err)
+		for _, l := range lines {
+			fmt.Println(l)
+		}
+		return nil
 	}
 	defer txtf.Close()
 	output, err := io.ReadAll(txtf)
