@@ -1,0 +1,104 @@
+stdout:
+00000000  1b 5b 48 1b 5b 32 4a 6d  74 72 40 6d 61 63 20 7e  |.[H.[2Jmtr@mac ~|
+00000010  20 24 20                                          | $ |
+wasm_exec.js:399 stdout:
+00000000  65                                                |e|
+wasm_exec.js:399 stdout:
+00000000  63                                                |c|
+wasm_exec.js:399 stdout:
+00000000  68                                                |h|
+wasm_exec.js:399 stdout:
+00000000  6f                                                |o|
+wasm_exec.js:399 stdout:
+00000000  65                                                |e|
+wasm_exec.js:399 stdout:
+00000000  63                                                |c|
+wasm_exec.js:399 stdout:
+00000000  68                                                |h|
+wasm_exec.js:399 stdout:
+00000000  6f                                                |o|
+wasm_exec.js:399 stdout:
+00000000  27                                                |'|
+wasm_exec.js:399 stdout:
+00000000  48                                                |H|
+wasm_exec.js:399 stdout:
+00000000  65                                                |e|
+wasm_exec.js:399 stdout:
+00000000  6c                                                |l|
+wasm_exec.js:399 stdout:
+00000000  6c                                                |l|
+wasm_exec.js:399 stdout:
+00000000  6f                                                |o|
+wasm_exec.js:399 stdout:
+00000000  2c                                                |,|
+wasm_exec.js:399 stdout:
+00000000  20                                                | |
+wasm_exec.js:399 stdout:
+00000000  77                                                |w|
+wasm_exec.js:399 stdout:
+00000000  6f                                                |o|
+wasm_exec.js:399 stdout:
+00000000  72                                                |r|
+wasm_exec.js:399 stdout:
+00000000  6c                                                |l|
+wasm_exec.js:399 stdout:
+00000000  64                                                |d|
+wasm_exec.js:399 stdout:
+00000000  21                                                |!|
+wasm_exec.js:399 stdout:
+00000000  27                                                |'|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  1b 5b 31 40 20                                    |.[1@ |
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  08                                                |.|
+wasm_exec.js:399 stdout:
+00000000  1b 5b 31 50                                       |.[1P|
+wasm_exec.js:399 stdout:
+00000000  1b 5b 31 50                                       |.[1P|
+wasm_exec.js:399 stdout:
+00000000  1b 5b 31 50                                       |.[1P|
+wasm_exec.js:399 stdout:
+00000000  1b 5b 31 50                                       |.[1P|
+wasm_exec.js:399 stdout:
+00000000  0d 0a 48 65 6c 6c 6f 2c  20 77 6f 72 6c 64 21 0d  |..Hello, world!.|
+00000010  0a                                                |.|
+wasm_exec.js:399 stdout:
+00000000  6d 74 72 40 6d 61 63 20  7e 20 24 20              |mtr@mac ~ $ |

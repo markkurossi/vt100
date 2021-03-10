@@ -1,0 +1,3 @@
+mtr@mac ~ $ echo 'Hello, world!'
+Hello, world!
+mtr@mac ~ $

@@ -97,12 +97,36 @@ func (d *Stringer) Set(p Point, char Char) {
 
 // InsertChars implements the CharDisplay.InsertChars function.
 func (d *Stringer) InsertChars(size, p Point, count int) {
-	// XXX
+	for len(d.lines) <= p.Y {
+		d.lines = append(d.lines, []rune{})
+	}
+	var line []rune
+	for x := 0; x < p.X; x++ {
+		if x < len(d.lines[p.Y]) {
+			line = append(line, d.lines[p.Y][x])
+		} else {
+			line = append(line, ' ')
+		}
+	}
+	for x := 0; x < count; x++ {
+		line = append(line, ' ')
+	}
+	for x := p.X; x < len(d.lines[p.Y]); x++ {
+		line = append(line, d.lines[p.Y][x])
+	}
+	d.lines[p.Y] = line
 }
 
 // DeleteChars implements the CharDisplay.DeleteChars function.
 func (d *Stringer) DeleteChars(size, p Point, count int) {
-	// XXX
+	if p.Y >= len(d.lines) || p.X >= len(d.lines[p.Y]) {
+		return
+	}
+	line := d.lines[p.Y][:p.X]
+	if p.X+count < len(d.lines[p.Y]) {
+		line = append(line, d.lines[p.Y][p.X+count:]...)
+	}
+	d.lines[p.Y] = line
 }
 
 // ScrollUp implements the CharDisplay.ScrollUp function.
