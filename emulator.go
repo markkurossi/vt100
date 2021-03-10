@@ -101,6 +101,7 @@ type Emulator struct {
 	Default      Char
 	ch           Char
 	overflow     bool
+	overflowCode int
 	state        *state
 	stdout       io.Writer
 	stderr       io.Writer
@@ -268,13 +269,16 @@ func (e *Emulator) scrollUp(count int) {
 
 func (e *Emulator) insertChar(code int) {
 	if e.overflow {
-		e.lf()
-		e.cr()
+		if e.overflowCode != ' ' {
+			e.lf()
+			e.cr()
+		}
 		e.overflow = false
 	}
 	e.display.Set(e.Cursor, e.ch.Clone(rune(code)))
 	if e.Cursor.X+1 >= e.Size.X {
 		e.overflow = true
+		e.overflowCode = code
 	} else {
 		e.moveTo(e.Cursor.Y, e.Cursor.X+1)
 	}
