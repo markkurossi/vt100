@@ -8,6 +8,7 @@ package vt100
 
 import (
 	"fmt"
+	"image/color"
 	"io"
 	"strings"
 )
@@ -31,20 +32,17 @@ var (
 	zeroPoint = Point{}
 )
 
-// RGBA defines display color value.s
-type RGBA uint32
-
 // Emulator color codes.
-const (
-	Black       = RGBA(0x000000ff)
-	Red         = RGBA(0xcd0000ff)
-	Green       = RGBA(0x00cd00ff)
-	Yellow      = RGBA(0xcdcd00ff)
-	Blue        = RGBA(0x0000eeff)
-	Magenta     = RGBA(0xcd00cdff)
-	Cyan        = RGBA(0x00cdcdff)
-	White       = RGBA(0xe5e5e5ff)
-	BrightWhite = RGBA(0xffffffff)
+var (
+	Black       = color.NRGBA{0x00, 0x00, 0x00, 0xff}
+	Red         = color.NRGBA{0xcd, 0x00, 0x00, 0xff}
+	Green       = color.NRGBA{0x00, 0xcd, 0x00, 0xff}
+	Yellow      = color.NRGBA{0xcd, 0xcd, 0x00, 0xff}
+	Blue        = color.NRGBA{0x00, 0x00, 0xee, 0xff}
+	Magenta     = color.NRGBA{0xcd, 0x00, 0xcd, 0xff}
+	Cyan        = color.NRGBA{0x00, 0xcd, 0xcd, 0xff}
+	White       = color.NRGBA{0xe5, 0xe5, 0xe5, 0xff}
+	BrightWhite = color.NRGBA{0xff, 0xff, 0xff, 0xff}
 )
 
 const (
@@ -55,8 +53,8 @@ const (
 // display.
 type Char struct {
 	Code       rune
-	Foreground RGBA
-	Background RGBA
+	Foreground color.NRGBA
+	Background color.NRGBA
 	Bold       bool
 	Italic     bool
 	Underline  bool
