@@ -20,4 +20,5 @@ func TestSparkline(t *testing.T) {
 	fmt.Printf("%s\n", SparklineRange(-100, 100, values))
 	fmt.Printf("%s\n", SparklineRange(50, 50, values))
 	fmt.Printf("%s\n", SparklineRange(25, 65, values))
+	fmt.Printf("%s\n", SparklineRange(65, 25, values))
 }

@@ -35,6 +35,9 @@ func SparklineRange(min, max int, values []int) string {
 	if len(values) == 0 {
 		return ""
 	}
+	if max < min {
+		min = max
+	}
 
 	delta := max - min
 
